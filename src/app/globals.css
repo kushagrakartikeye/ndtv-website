@@ -1,21 +1,51 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #111;
+  color: #fff;
+  font-family: 'Inter', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  max-width: 1200px;
+  margin: 40px auto 0 auto;
+  padding: 40px;
+  background: rgba(20,20,20,0.9);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 16px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+a:hover {
+  color: #ff0000;
+}
+
+input[type="email"] {
+  padding: 12px 18px;
+  border-radius: 6px 0 0 6px;
+  border: none;
+  font-size: 1rem;
+  width: 250px;
+  margin-right: -4px;
+}
+
+button[type="submit"] {
+  padding: 12px 20px;
+  border-radius: 0 6px 6px 0;
+  border: none;
+  background: #e53935;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+button[type="submit"]:hover {
+  background: #b71c1c;
 }

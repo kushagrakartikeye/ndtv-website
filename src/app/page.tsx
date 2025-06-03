@@ -1,101 +1,127 @@
-import Image from "next/image";
+'use client';
+import Logo from '../../components/Logo';
+import Navbar from '../../components/Navbar';
+import FAQ from '../../components/FAQ';
+import Link from 'next/link';
+
+const headlines = [
+  {
+    title: `"We Are Ready": Mamata Banerjee's 'Poll Battle' Dare For PM After Criticism`,
+    url: "https://www.ndtv.com/india-news/we-are-ready-mamata-banerjees-poll-battle-dare-for-pm-after-criticism-8537296",
+    image: "/headlines/we-are-ready.png"
+  },
+  {
+    title: "इजरायल ने ही मारा था हानिया को, काट्ज ने मान लिया, जानिए नासा के पार्कर से लेकर दुनिया की 10 बड़ी खबरें",
+    url: "https://ndtv.in/topic/top-headlines",
+    image: "/headlines/israel-news.png"
+  },
+  {
+    title: "Top 25 Headlines Today : प्रयागराज में UPPSC कार्यालय के बाहर छात्रों का प्रदर्शन, दिल्ली मेट्रो ने शुरू की बाइक टैक्सी सेवा",
+    url: "https://ndtv.in/topic/top-headlines",
+    image: "/headlines/uppsc-protest.png"
+  },
+  {
+    title: "Breaking News : लेबनान में इजरायली बमबारी में मरने वालों की संख्या हुई 274, हिज्बुल्लाह के 800 ठिकाने बने निशाना",
+    url: "https://ndtv.in/topic/top-headlines",
+    image: "/headlines/lebanon-bombing.png"
+  },
+  {
+    title: "TOP HINDI NEWS: शिवसेना नेता संजय राऊत की ED हिरासत 8 अगस्त तक बढ़ी.",
+    url: "https://ndtv.in/india/top-headlines-live-updates-big-breaking-stories-china-taiwan-tiranga-rally-updates-3222993",
+    image: "/headlines/weird.png"
+  }
+];
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <>
+      <Logo />
+      <Navbar />
+      <main>
+        <h1 style={{
+          fontSize: '2.5rem',
+          fontWeight: 700,
+          margin: '32px 0 12px 0',
+          letterSpacing: '0.01em'
+        }}>
+          Welcome to NDTV
+        </h1>
+        <p style={{ fontSize: '1.1rem', color: '#bbb', maxWidth: 700, margin: '0 0 18px 0' }}>
+          Here are NDTV's Top headlines!
+        </p>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+        {/* Headline Cards Section */}
+        <section style={{
+          maxWidth: 1100,
+          margin: '18px auto 14px auto',
+          display: 'flex',
+          gap: 6,  // reduced gap for tighter layout
+          flexWrap: 'wrap',
+          justifyContent: 'center'
+        }}>
+          {headlines.map((headline, idx) => (
+            <Link
+              key={idx}
+              href={headline.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                position: 'relative',
+                width: 200,
+                height: 320,
+                borderRadius: 8,
+                overflow: 'hidden',
+                cursor: 'pointer',
+                boxShadow: '0 3px 8px rgba(0,0,0,0.18)',
+                transition: 'transform 0.22s cubic-bezier(.4,2,.6,1)',
+                display: 'flex',
+                alignItems: 'flex-end',
+                color: '#fff',
+                textDecoration: 'none',
+                backgroundColor: '#000',
+                margin: 0 // ensure no extra margin
+              }}
+              onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.035)'}
+              onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+            >
+              <img
+                src={headline.image}
+                alt={headline.title}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  filter: 'brightness(0.65)'
+                }}
+              />
+              <div style={{
+                position: 'relative',
+                width: '100%',
+                padding: '8px 8px 12px 8px',
+                fontWeight: '600',
+                fontSize: '1.01rem',
+                zIndex: 2,
+                textShadow: '0 0 6px rgba(0,0,0,0.8)',
+                background: 'linear-gradient(0deg, rgba(0,0,0,0.65) 40%, rgba(0,0,0,0.15) 100%)',
+                borderBottomLeftRadius: 8,
+                borderBottomRightRadius: 8,
+                minHeight: 54,
+                maxHeight: 80,
+                overflow: 'hidden',
+                display: 'flex',
+                alignItems: 'flex-end'
+              }}>
+                {headline.title}
+              </div>
+            </Link>
+          ))}
+        </section>
+
+        <FAQ />
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    </>
   );
 }
