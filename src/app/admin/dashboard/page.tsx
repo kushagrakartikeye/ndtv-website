@@ -43,7 +43,7 @@ export default function AdminDashboard() {
     router.push('/admin/login');
   };
 
-  const handleReply = async (contactId) => {
+  const handleReply = async (contactId: string) => {
     if (!replyText.trim()) return;
 
     try {
