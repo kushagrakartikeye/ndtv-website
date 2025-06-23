@@ -256,7 +256,7 @@ export default function Home() {
   return (
     <div style={{
       opacity: showContent ? 1 : 0,
-      transform: showContent ? 'translateY(0)' : 'translateY(20px)'
+      transform: showContent ? 'translateY(0)' : 'translateY(20px)',
       transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)'
     }}>
       <Logo />
