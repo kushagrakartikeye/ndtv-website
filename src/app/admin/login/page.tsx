@@ -3,91 +3,67 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function AdminLogin() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
     try {
       const res = await fetch('/api/admin/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ email, password }),
       });
-
-      const data = await res.json();
-
-      if (res.ok && data.token) {
-        // Set token in localStorage
-        localStorage.setItem('adminToken', data.token);
+      const json = await res.json();
+      if (res.ok) {
+        localStorage.setItem('adminToken', json.token);
         router.push('/admin/dashboard');
       } else {
-        setError('Invalid credentials');
+        setError(json.message || 'Login failed');
       }
     } catch (err) {
-      setError('Server error');
+      setError('An error occurred. Please try again.');
     }
   };
 
   return (
-    <div style={{
-      maxWidth: 400,
-      margin: '100px auto',
-      padding: '40px',
-      background: 'rgba(20,20,20,0.9)',
-      borderRadius: 18,
-      boxShadow: '0 8px 32px rgba(0,0,0,0.15)'
-    }}>
-      <h1 style={{ fontSize: '1.8rem', marginBottom: 24 }}>Admin Login</h1>
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-        <div>
-          <label style={{ display: 'block', marginBottom: 8 }}>Username</label>
+    <div style={{ maxWidth: 400, margin: '100px auto', padding: '20px', background: '#1a1a1a', borderRadius: 12 }}>
+      <h1 style={{ fontSize: '1.8rem', color: '#fff', marginBottom: 24 }}>Admin Login</h1>
+      {error && <p style={{ color: '#ff6b6b', marginBottom: 16 }}>{error}</p>}
+      <form onSubmit={handleSubmit}>
+        <div style={{ marginBottom: 16 }}>
+          <label style={{ display: 'block', marginBottom: 8, color: '#fff' }}>Email</label>
           <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '10px',
-              borderRadius: 6,
-              border: '1px solid #333',
-              background: '#111',
-              color: '#fff'
-            }}
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            style={{ width: '100%', padding: '10px', borderRadius: 6, border: '1px solid #444' }}
+            required
           />
         </div>
-        <div>
-          <label style={{ display: 'block', marginBottom: 8 }}>Password</label>
+        <div style={{ marginBottom: 24 }}>
+          <label style={{ display: 'block', marginBottom: 8, color: '#fff' }}>Password</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '10px',
-              borderRadius: 6,
-              border: '1px solid #333',
-              background: '#111',
-              color: '#fff'
-            }}
+            style={{ width: '100%', padding: '10px', borderRadius: 6, border: '1px solid #444' }}
+            required
           />
         </div>
-        {error && <div style={{ color: '#e53935' }}>{error}</div>}
         <button
           type="submit"
           style={{
-            padding: '12px 24px',
+            width: '100%',
+            padding: '12px',
             background: '#e53935',
             color: '#fff',
             border: 'none',
-            borderRadius: 6,
+            borderRadius: 8,
             cursor: 'pointer',
-            fontSize: '1rem',
-            fontWeight: 600,
-            transition: 'background 0.2s'
+            fontWeight: 600
           }}
         >
           Login
