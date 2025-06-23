@@ -8,7 +8,7 @@ export default function AdminDashboard() {
   const [contacts, setContacts] = useState([]);
   const [subscribers, setSubscribers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [activeView, setActiveView] = useState(null); // 'contacts' or 'subscribers'
+  const [activeView, setActiveView] = useState<string | null>(null); // 'contacts' or 'subscribers'
   const [replyingTo, setReplyingTo] = useState(null);
   const [replyText, setReplyText] = useState('');
   const router = useRouter();
