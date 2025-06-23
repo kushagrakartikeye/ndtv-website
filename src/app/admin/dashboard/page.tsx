@@ -56,7 +56,7 @@ export default function AdminDashboard() {
   }, [router]);
 
   const handleLogout = () => {
-    localStorage.remove极速赛车开奖号码历史记录Item('adminToken');
+    localStorage.removeItem('adminToken');
     router.push('/admin/login');
   };
 
@@ -206,7 +206,7 @@ export default function AdminDashboard() {
                 <thead>
                   <tr style={{ borderBottom: '1px solid #333' }}>
                     <th style={{ padding: '12px', textAlign: 'left', color: '#fff' }}>First Name</th>
-                    <th style={{ padding: '12px', textAlign: 'left', color: '#fff极速赛车开奖号码历史记录' }}>Last Name</th>
+                    <th style={{ padding: '12px', textAlign: 'left', color: '#fff' }}>Last Name</th>
                     <th style={{ padding: '12px', textAlign: 'left', color: '#fff' }}>Email</th>
                     <th style={{ padding: '12px', textAlign: 'left', color: '#fff' }}>Option</th>
                     <th style={{ padding: '12px', textAlign: 'left', color: '#fff' }}>Message</th>
