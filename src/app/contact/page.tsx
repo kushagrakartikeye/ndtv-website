@@ -462,7 +462,7 @@ export default function Contact() {
                         <div style={{ color: '#ccc', fontSize: '0.9rem', marginBottom: 12 }}>
                           Sent: {msg.createdAt ? new Date(msg.createdAt).toLocaleString() : '-'}
                         </div>
-                        {msg.replies?.length > 0 && (
+                        {msg.replies && msg.replies.length > 0 && (
                           <div style={{ borderTop: '1px solid #333', paddingTop: 12 }}>
                             <div style={{ color: '#25D366', marginBottom: 8 }}>Admin Replies:</div>
                             {msg.replies.map((reply, replyIndex) => (
