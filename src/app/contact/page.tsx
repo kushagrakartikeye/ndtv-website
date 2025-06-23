@@ -1,13 +1,22 @@
 'use client';
-import { useState } from 'react';
+import { useState, FormEvent } from 'react';
 import Navbar from '../../../components/Navbar';
+
+type Message = {
+  message: string;
+  createdAt: string;
+  replies?: Array<{
+    adminReply: string;
+    repliedAt: Date | string;
+  }>;
+};
 
 export default function Contact() {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
-    password: '', // New password field
+    password: '',
     option: '',
     message: '',
     phone: '',
@@ -19,22 +28,19 @@ export default function Contact() {
   const [showMessagesLogin, setShowMessagesLogin] = useState(false);
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
-  const [userMessages, setUserMessages] = useState([]);
+  const [userMessages, setUserMessages] = useState<Message[]>([]);
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!formData.firstName || !formData.lastName || !formData.email || !formData.password || !formData.option) {
       setError('Please fill all required fields including password.');
       return;
     }
-    
-    // Password validation
     if (formData.password.length < 6) {
       setError('Password must be at least 6 characters long.');
       return;
     }
-
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
@@ -62,7 +68,7 @@ export default function Contact() {
     }
   };
 
-  const handleCheckMessages = async (e) => {
+  const handleCheckMessages = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const res = await fetch('/api/user/messages', {
@@ -93,7 +99,7 @@ export default function Contact() {
         borderRadius: 18,
         boxShadow: '0 8px 32px rgba(0,0,0,0.15)'
       }}>
-        <h1 style={{ fontSize: '2rem', marginBottom: 24 }}>Contact Us</h1>
+        <h1 style={{ fontSize: '2rem', marginBottom: 24, color: '#fff' }}>Contact Us</h1>
 
         {submitted ? (
           <div style={{ color: '#4CAF50', textAlign: 'center' }}>
@@ -117,8 +123,8 @@ export default function Contact() {
                 marginTop: 12,
                 transition: 'background 0.2s'
               }}
-              onMouseOver={e => e.currentTarget.style.background = '#b71c1c'}
-              onMouseOut={e => e.currentTarget.style.background = '#e53935'}
+              onMouseOver={e => (e.currentTarget as HTMLButtonElement).style.background = '#b71c1c'}
+              onMouseOut={e => (e.currentTarget as HTMLButtonElement).style.background = '#e53935'}
             >
               Send Another Message
             </button>
@@ -140,6 +146,7 @@ export default function Contact() {
                     background: '#111',
                     color: '#fff'
                   }}
+                  required
                 />
               </div>
               <div style={{ flex: 1 }}>
@@ -156,10 +163,10 @@ export default function Contact() {
                     background: '#111',
                     color: '#fff'
                   }}
+                  required
                 />
               </div>
             </div>
-
             <div>
               <label style={{ display: 'block', marginBottom: 8, color: '#fff' }}>Email</label>
               <input
@@ -174,14 +181,12 @@ export default function Contact() {
                   background: '#111',
                   color: '#fff'
                 }}
+                required
               />
             </div>
-
-            {/* New Password Field */}
             <div>
               <label style={{ display: 'block', marginBottom: 8, color: '#fff' }}>
-                Set Password 
-                <span style={{ fontSize: '0.85rem', color: '#ccc' }}> (to check replies later)</span>
+                Set Password <span style={{ fontSize: '0.85rem', color: '#ccc' }}> (to check replies later)</span>
               </label>
               <input
                 type="password"
@@ -196,9 +201,9 @@ export default function Contact() {
                   background: '#111',
                   color: '#fff'
                 }}
+                required
               />
             </div>
-
             <div>
               <label style={{ display: 'block', marginBottom: 8, color: '#fff' }}>How can we help you?</label>
               <div style={{ display: 'flex', gap: 12 }}>
@@ -224,12 +229,10 @@ export default function Contact() {
                 ))}
               </div>
             </div>
-
             {formData.option === 'message' && (
               <div>
                 <label style={{ display: 'block', marginBottom: 8, color: '#fff' }}>
-                  Your Message 
-                  <span style={{ fontSize: '0.85rem', color: '#ccc' }}> (you can check the replies by clicking on the blue icon on the right)</span>
+                  Your Message <span style={{ fontSize: '0.85rem', color: '#ccc' }}> (you can check the replies by clicking on the blue icon on the right)</span>
                 </label>
                 <textarea
                   value={formData.message}
@@ -246,7 +249,6 @@ export default function Contact() {
                 />
               </div>
             )}
-
             {formData.option === 'callback' && (
               <div>
                 <label style={{ display: 'block', marginBottom: 8, color: '#fff' }}>Phone Number</label>
@@ -265,7 +267,6 @@ export default function Contact() {
                 />
               </div>
             )}
-
             {formData.option === 'other' && (
               <div>
                 <label style={{ display: 'block', marginBottom: 8, color: '#fff' }}>Details</label>
@@ -284,9 +285,7 @@ export default function Contact() {
                 />
               </div>
             )}
-
             {error && <div style={{ color: '#e53935' }}>{error}</div>}
-
             <button
               type="submit"
               style={{
@@ -300,8 +299,8 @@ export default function Contact() {
                 fontWeight: 600,
                 transition: 'background 0.2s'
               }}
-              onMouseOver={e => e.currentTarget.style.background = '#b71c1c'}
-              onMouseOut={e => e.currentTarget.style.background = '#e53935'}
+              onMouseOver={e => (e.currentTarget as HTMLButtonElement).style.background = '#b71c1c'}
+              onMouseOut={e => (e.currentTarget as HTMLButtonElement).style.background = '#e53935'}
             >
               Send Message
             </button>
@@ -333,8 +332,8 @@ export default function Contact() {
             boxShadow: '0 4px 12px rgba(0,123,255,0.3)',
             transition: 'transform 0.2s'
           }}
-          onMouseOver={e => e.currentTarget.style.transform = 'scale(1.1)'}
-          onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}
+          onMouseOver={e => (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1.1)'}
+          onMouseOut={e => (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1)'}
           title="Check Messages"
         >
           📨
@@ -376,7 +375,7 @@ export default function Contact() {
                     <input
                       type="email"
                       value={userEmail}
-                      onChange={(e) => setUserEmail(e.target.value)}
+                      onChange={e => setUserEmail(e.target.value)}
                       style={{
                         width: '100%',
                         padding: '10px',
@@ -393,7 +392,7 @@ export default function Contact() {
                     <input
                       type="password"
                       value={userPassword}
-                      onChange={(e) => setUserPassword(e.target.value)}
+                      onChange={e => setUserPassword(e.target.value)}
                       style={{
                         width: '100%',
                         padding: '10px',
@@ -478,7 +477,7 @@ export default function Contact() {
                               >
                                 <div style={{ color: '#fff' }}>{reply.adminReply}</div>
                                 <div style={{ color: '#888', fontSize: '0.8rem' }}>
-                                  {new Date(reply.repliedAt).toLocaleString()}
+                                  {new Date(reply.repliedAt as string).toLocaleString()}
                                 </div>
                               </div>
                             ))}
