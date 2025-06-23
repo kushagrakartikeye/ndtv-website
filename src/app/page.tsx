@@ -84,7 +84,7 @@ const aggressiveKeywords = {
 
 // Recommendation tracking hook
 function useRecommendation() {
-  const [interactions, setInteractions] = useState([]);
+  const [interactions, setInteractions] = useState<any[]>([]);
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
@@ -92,7 +92,7 @@ function useRecommendation() {
     setInteractions(saved ? JSON.parse(saved) : []);
   }, []);
 
-  const trackInteraction = useCallback((type, data) => {
+  const trackInteraction = useCallback((type: string, data: any) => {
     const newInteraction = { type, data, timestamp: Date.now() };
     setInteractions(prev => {
       const updated = [...prev, newInteraction].slice(-50);
@@ -101,22 +101,22 @@ function useRecommendation() {
     });
   }, []);
 
-  const getRecommendations = useCallback((headlines) => {
-    const keywords = interactions.flatMap(interaction => {
+  const getRecommendations = useCallback((headlines: any[]) => {
+    const keywords = interactions.flatMap((interaction: any) => {
       if (interaction.type === 'search') return interaction.data.toLowerCase().split(' ');
       if (interaction.type === 'click') return interaction.data.title.toLowerCase().match(/\b\w+\b/g) || [];
       return [];
     });
 
-    const keywordCounts = keywords.reduce((acc, word) => {
+    const keywordCounts = keywords.reduce((acc: any, word: string) => {
       acc[word] = (acc[word] || 0) + 1;
       return acc;
     }, {});
 
     return headlines
-      .filter(headline => {
+      .filter((headline: any) => {
         const titleWords = headline.title.toLowerCase().match(/\b\w+\b/g) || [];
-        return titleWords.some(word => keywordCounts[word] > 0);
+        return titleWords.some((word: string) => keywordCounts[word] > 0);
       })
       .slice(0, 5);
   }, [interactions]);
@@ -125,7 +125,7 @@ function useRecommendation() {
 }
 
 // Emotion filtering function
-const getFilteredHeadlines = (liveHeadlines, staticHeadlines, emotion) => {
+const getFilteredHeadlines = (liveHeadlines: any[], staticHeadlines: any[], emotion: any) => {
   const allHeadlines = [...liveHeadlines, ...staticHeadlines];
   const withImages = allHeadlines.map((h, index) => ({
     ...h,
@@ -134,18 +134,18 @@ const getFilteredHeadlines = (liveHeadlines, staticHeadlines, emotion) => {
 
   if (!emotion) return withImages.slice(0, 15);
 
-  const config = aggressiveKeywords[emotion.newsType] || aggressiveKeywords.neutral;
+  const config = aggressiveKeywords[emotion.newsType as keyof typeof aggressiveKeywords] || aggressiveKeywords.neutral;
   
-  return withImages.filter(headline => {
+  return withImages.filter((headline: any) => {
     const text = `${headline.title} ${headline.description || ''}`.toLowerCase();
-    if (config.exclude.some(kw => text.includes(kw))) return false;
-    return config.include.length === 0 || config.include.some(kw => text.includes(kw));
+    if (config.exclude.some((kw: string) => text.includes(kw))) return false;
+    return config.include.length === 0 || config.include.some((kw: string) => text.includes(kw));
   }).slice(0, 15);
 };
 
 // Google Trends Widget Component
 function GoogleTrendsChart() {
-  const trendsRef = useRef(null);
+  const trendsRef = useRef<HTMLDivElement>(null);
   const [scriptsLoaded, setScriptsLoaded] = useState(false);
 
   useEffect(() => {
@@ -207,10 +207,10 @@ function GoogleTrendsChart() {
 
 export default function Home() {
   const [showSplash, setShowSplash] = useState(true);
-  const [userEmotion, setUserEmotion] = useState(null);
+  const [userEmotion, setUserEmotion] = useState<any>(null);
   const [showContent, setShowContent] = useState(false);
   const [searchInput, setSearchInput] = useState('');
-  const [recommendations, setRecommendations] = useState([]);
+  const [recommendations, setRecommendations] = useState<any[]>([]);
   
   const { trackInteraction, getRecommendations, showPopup, setShowPopup, interactions } = useRecommendation();
   const { headlines: liveHeadlines, loading, error, refresh } = useNDTVRss();
@@ -220,24 +220,27 @@ export default function Home() {
     [liveHeadlines]
   );
 
-  const filteredHeadlines = getFilteredHeadlines(liveHeadlines, staticHeadlines, userEmotion);
+  const filteredHeadlines = useMemo(
+    () => getFilteredHeadlines(liveHeadlines, staticHeadlines, userEmotion),
+    [liveHeadlines, userEmotion]
+  );
 
   useEffect(() => {
     setRecommendations(getRecommendations(allHeadlines));
   }, [interactions, getRecommendations, allHeadlines]);
 
-  const handleSearchInput = (e) => {
+  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value;
     setSearchInput(query);
     if (query.length > 2) trackInteraction('search', query);
   };
 
-  const handleCardClick = (headline) => {
+  const handleCardClick = (headline: any) => {
     trackInteraction('click', headline);
     if (!showPopup) setShowPopup(true);
   };
 
-  const handleSplashComplete = (emotion) => {
+  const handleSplashComplete = (emotion: any) => {
     setUserEmotion(emotion);
     setShowSplash(false);
     setTimeout(() => setShowContent(true), 100);
@@ -253,7 +256,7 @@ export default function Home() {
   return (
     <div style={{
       opacity: showContent ? 1 : 0,
-      transform: showContent ? 'translateY(0)' : 'translateY(20px)',
+      transform: showContent ? 'translateY(0)' : 'translateY(20px)'
       transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)'
     }}>
       <Logo />
@@ -438,7 +441,7 @@ export default function Home() {
                   objectFit: 'cover',
                   filter: 'brightness(0.65)'
                 }}
-                onError={(e) => {
+                onError={(e: any) => {
                   e.target.src = defaultImages[idx % defaultImages.length];
                 }}
               />
@@ -491,7 +494,7 @@ export default function Home() {
                     width: 300,
                     border: '2px solid #4CAF50',
                     borderRadius: 8,
-                    padding: 12,
+                    padding: '12px',
                     background: '#000',
                     color: '#fff',
                     textDecoration: 'none',
@@ -542,7 +545,7 @@ export default function Home() {
           </h2>
           
           <div style={{ 
-            background: 'linear-gradient(135deg,rgb(36, 30, 30) 0%, rgb(186, 40, 27 100%)',
+            background: 'linear-gradient(135deg,rgb(36, 30, 30) 0%, rgb(186, 40, 27) 100%)',
             borderRadius: '12px',
             padding: '24px',
             color: 'white',
