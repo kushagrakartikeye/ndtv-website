@@ -1,6 +1,8 @@
 'use client';
-interface Window {
-  trends: any;
+declare global {
+  interface Window {
+    trends: any;
+  }
 }
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import Logo from '../../components/Logo';
