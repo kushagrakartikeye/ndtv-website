@@ -4,12 +4,29 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Navbar from '../../../../components/Navbar';
 
+type Contact = {
+  _id: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  option?: string;
+  message?: string;
+  phone?: string;
+  other?: string;
+  createdAt?: string;
+};
+
+type Subscriber = {
+  _id: string;
+  email: string;
+};
+
 export default function AdminDashboard() {
-  const [contacts, setContacts] = useState([]);
-  const [subscribers, setSubscribers] = useState([]);
+  const [contacts, setContacts] = useState<Contact[]>([]);
+  const [subscribers, setSubscribers] = useState<Subscriber[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeView, setActiveView] = useState<string | null>(null); // 'contacts' or 'subscribers'
-  const [replyingTo, setReplyingTo] = useState(null);
+  const [activeView, setActiveView] = useState<string | null>(null);
+  const [replyingTo, setReplyingTo] = useState<string | null>(null);
   const [replyText, setReplyText] = useState('');
   const router = useRouter();
 
@@ -64,7 +81,6 @@ export default function AdminDashboard() {
       if (res.ok) {
         setReplyingTo(null);
         setReplyText('');
-        // Refresh data
         const dataRes = await fetch('/api/admin/contacts', {
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -84,7 +100,6 @@ export default function AdminDashboard() {
     <div>
       <Navbar />
       <div style={{ maxWidth: 1200, margin: '40px auto', padding: '0 20px' }}>
-        {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 40 }}>
           <h1 style={{ fontSize: '2.2rem', color: '#fff' }}>Admin Dashboard</h1>
           <button
@@ -103,7 +118,6 @@ export default function AdminDashboard() {
           </button>
         </div>
 
-        {/* Toggle Cards */}
         {!activeView && (
           <div style={{ display: 'flex', gap: 40, justifyContent: 'center', marginBottom: 40 }}>
             <div
@@ -166,7 +180,6 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        {/* Back Button */}
         {activeView && (
           <button
             onClick={() => setActiveView(null)}
@@ -185,7 +198,6 @@ export default function AdminDashboard() {
           </button>
         )}
 
-        {/* Contacts Table - Complete Data */}
         {activeView === 'contacts' && (
           <div style={{ background: '#181818', borderRadius: 12, padding: 24 }}>
             <h2 style={{ color: '#fff', marginBottom: 16 }}>Contact Messages</h2>
@@ -286,14 +298,13 @@ export default function AdminDashboard() {
                         </tr>
                       )}
                     </React.Fragment>
-                  ))}
+                  )}
                 </tbody>
               </table>
             </div>
           </div>
         )}
-
-        {/* Subscribers Table - Only Email */}
+        
         {activeView === 'subscribers' && (
           <div style={{ background: '#181818', borderRadius: 12, padding: 24 }}>
             <h2 style={{ color: '#fff', marginBottom: 16 }}>Newsletter Subscribers</h2>
