@@ -1,4 +1,7 @@
 'use client';
+interface Window {
+  trends: any;
+}
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import Logo from '../../components/Logo';
 import Navbar from '../../components/Navbar';
