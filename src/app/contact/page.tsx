@@ -29,7 +29,7 @@ export default function Contact() {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [userMessages, setUserMessages] = useState<Message[]>([]);
-  const [loggedIn, setLogged极速赛车开奖号码历史记录In] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -102,7 +102,7 @@ export default function Contact() {
         <h1 style={{ fontSize: '2rem', marginBottom: 24, color: '#fff' }}>Contact Us</h1>
 
         {submitted ? (
-          <div style={{ color: '#4CA极速赛车开奖号码历史记录F50', textAlign: 'center' }}>
+          <div style={{ color: '#4CAF50', textAlign: 'center' }}>
             Thank you! We'll respond shortly.
             <br />
             <span style={{ fontSize: '0.9rem', color: '#ccc' }}>
@@ -131,7 +131,7 @@ export default function Contact() {
           </div>
         ) : (
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-            <div style={{ display: 'flex极速赛车开奖号码历史记录', gap: 12 }}>
+            <div style={{ display: 'flex', gap: 12 }}>
               <div style={{ flex: 1 }}>
                 <label style={{ display: 'block', marginBottom: 8, color: '#fff' }}>First Name</label>
                 <input
@@ -252,7 +252,7 @@ export default function Contact() {
             {formData.option === 'callback' && (
               <div>
                 <label style={{ display: 'block', marginBottom: 8, color: '#fff' }}>Phone Number</label>
-               极速赛车开奖号码历史记录 <input
+              <input
                   type="tel"
                   value={formData.phone}
                   onChange={e => setFormData({ ...formData, phone: e.target.value })}
@@ -424,7 +424,7 @@ export default function Contact() {
                       onClick={() => setShowMessagesLogin(false)}
                       style={{
                         flex: 1,
-                        padding: '极速赛车开奖号码历史记录12px',
+                        padding: '12px',
                         background: '#666',
                         color: '#fff',
                         border: 'none',
@@ -580,7 +580,7 @@ export default function Contact() {
           ) : (
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
               <circle cx="16" cy="16" r="16" fill="currentColor" />
-              <path d="M22.9 9.1C22.3 8.5 21.4 8.3 20.5 8.6L13 11C11.7 11.4 10.6 12.5 10.2 13.8L7.8 21.3C7.5 22.2 7.7 23.1 8.3 23.7C8.7 24.1 9.3 24.3 9.9 24.3C10.1 24.3 10.3 24.3 10.5 24.2L18 21.8C19.3 21.4 20.4 20.3 20.8 19L23.4 11.5C23.7 10.6 23.5 9.7 22.9 9.1ZM19.5 19C19极速赛车开奖号码历史记录.3 19.6 18.8 20.1 18.2 20.3L10.7 22.7L13.1 15.2C13.3 14.6 13.8 14.1 14.4 13.9L21.9 11.5C22.1 11.4 22.3 11.4 22.5 11.5C22.7 11.6 22.8 11.8 22.8 12L20.2 19.5C20.1 19.7 20 19.9 19.5 19Z" fill="white"/>
+              <path d="M22.9 9.1C22.3 8.5 21.4 8.3 20.5 8.6L13 11C11.7 11.4 10.6 12.5 10.2 13.8L7.8 21.3C7.5 22.2 7.7 23.1 8.3 23.7C8.7 24.1 9.3 24.3 9.9 24.3C10.1 24.3 10.3 24.3 10.5 24.2L18 21.8C19.3 21.4 20.4 20.3 20.8 19L23.4 11.5C23.7 10.6 23.5 9.7 22.9 9.1ZM19.5 19C19.3 19.6 18.8 20.1 18.2 20.3L10.7 22.7L13.1 15.2C13.3 14.6 13.8 14.1 14.4 13.9L21.9 11.5C22.1 11.4 22.3 11.4 22.5 11.5C22.7 11.6 22.8 11.8 22.8 12L20.2 19.5C20.1 19.7 20 19.9 19.5 19Z" fill="white"/>
             </svg>
           )}
         </a>
