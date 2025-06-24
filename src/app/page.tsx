@@ -565,7 +565,6 @@ export default function Home() {
             }}>
               🔥 Currently Trending in India
             </h3>
-            <GoogleTrendsChart />
           </div>
         </section>
 
