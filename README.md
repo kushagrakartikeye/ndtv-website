@@ -1,41 +1,174 @@
-<<<<<<< HEAD
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🚀 NDTV News Platform
+A Full-Stack News Aggregation and Management System
 
-## Getting Started
+📜 Overview
+This project is a full-stack news aggregation and management platform developed during my technical internship at NDTV. It features real-time news fetching, personalized recommendations, secure admin interfaces, and seamless integration with third-party services like Google Trends. The platform is built with modern web technologies and is designed for scalability, performance, and user engagement.
 
-First, run the development server:
+🛠️ Tech Stack
+Frontend: Next.js 13+ (App Router), TypeScript, React, CSS Modules
 
-```bash
+Backend: Node.js, Next.js API Routes
+
+Database: MongoDB (with Mongoose ODM)
+
+Authentication: JWT (JSON Web Tokens)
+
+Deployment: Vercel (with CI/CD)
+
+Third-Party Integrations: Google Trends API, RSS Feed Parsing
+
+Performance: Lazy Loading, Image Optimization, Lighthouse Optimizations
+
+UI/UX: Responsive Design, Splash Screen, Emotion Filtering
+
+🌟 Features
+1. Real-Time News Aggregation
+RSS Feed Parsing: Fetches, parses, and displays live news headlines from multiple RSS sources.
+
+Robust Error Handling: Handles XML inconsistencies and API failures gracefully.
+
+Fallback Images: Uses default images for missing thumbnails.
+
+2. News Card System
+Dynamic Rendering: Displays news cards with hover effects, live status indicators, and optimized image loading.
+
+Performance: Lazy-loads components and images for faster page loads.
+
+3. Personalized Recommendations
+User Interaction Tracking: Tracks clicks and searches to personalize content.
+
+Keyword Matching: Recommends relevant articles based on user behavior.
+
+State Persistence: Stores interaction history in localStorage for quick recommendations.
+
+4. Admin Dashboard
+Secure Authentication: JWT-based login for admin access.
+
+User Message Management: CRUD operations for user messages and newsletter subscriptions.
+
+Real-Time Updates: Atomic MongoDB operations for instant feedback.
+
+Admin Reply System: Threaded replies using MongoDB $push operations.
+
+5. Google Trends Integration
+Live Trending Topics: Embeds Google Trends charts via iframe and custom API integration.
+
+CORS Handling: Manages cross-origin requests and dynamic script loading.
+
+UI Fixes: Resolves issues with trending sections and interactive graphs.
+
+6. Performance Optimization
+Lazy Loading: Loads components and images on demand.
+
+Image Optimization: Uses optimized images and fallbacks.
+
+Lighthouse Scores: Achieves high performance, accessibility, and SEO scores.
+
+7. Security
+JWT Authentication: Secure token validation and storage.
+
+Input Validation: Sanitizes and validates user inputs.
+
+Secure Storage: Protects sensitive data with best practices.
+
+8. User Experience
+Splash Screen: Personalized welcome screen with emotion-based filtering.
+
+WhatsApp Floating Button: Direct contact via a floating button with hover image and caption.
+
+User Message Checking: Secure login modal for users to check their messages.
+
+9. Deployment & CI/CD
+Vercel Deployment: Automated builds and environment variable management.
+
+CI/CD Pipeline: Ensures smooth updates and rollbacks.
+
+10. Collaboration & Communication
+Cross-Functional Teams: Worked with designers and content teams for a seamless UX.
+
+Technical Documentation: Clear code comments and README for maintainability.
+
+🏗️ Architecture
+Frontend: Next.js App Router for dynamic, SEO-friendly pages.
+
+Backend: Next.js API Routes for server-side logic and data fetching.
+
+Database: MongoDB for flexible, scalable data storage.
+
+Authentication: JWT for secure admin access.
+
+Third-Party Integrations: Custom scripts for Google Trends and RSS feeds.
+
+Performance: Optimized for fast load times and high Lighthouse scores.
+
+🚀 Getting Started
+Prerequisites
+Node.js (v18+ recommended)
+
+MongoDB Atlas or local MongoDB instance
+
+Google Trends API Key (optional, for live trends)
+
+Vercel Account (for deployment)
+
+Installation
+Clone the repository:
+
+bash
+git clone https://github.com/your-username/ndtv-news-platform.git
+cd ndtv-news-platform
+Install dependencies:
+
+bash
+npm install
+Set up environment variables:
+
+Create a .env.local file in the root directory.
+
+Add your MongoDB connection string and JWT secret:
+
+text
+MONGODB_URI=your-mongodb-connection-string
+JWT_SECRET=your-jwt-secret
+GOOGLE_TRENDS_API_KEY=your-api-key (optional)
+Run the development server:
+
+bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Open http://localhost:3000 in your browser.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🧪 Testing
+Unit Tests: (Coming soon)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Integration Tests: (Coming soon)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Manual Testing: Test all features, including admin login, message management, and third-party integrations.
 
-## Learn More
+🚀 Deployment
+Push your code to a GitHub repository.
 
-To learn more about Next.js, take a look at the following resources:
+Connect the repository to Vercel.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Set environment variables in Vercel dashboard.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Deploy!
 
-## Deploy on Vercel
+📝 Future Work
+Machine Learning Recommendations: Integrate TensorFlow.js for more accurate personalization.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Real-Time Analytics: Add WebSockets or GraphQL subscriptions for live user analytics.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-=======
-# ndtv-website
-This is a project i made during my time of a month long internship at NDTV
->>>>>>> d9a8609ffbb18a569e2a9c825afa1160ead6fee7
+Admin Dashboard Enhancements: Bulk actions and advanced filtering.
+
+Automated Testing: Add unit and integration tests.
+
+🤝 Contributing
+Contributions are welcome! Please open an issue or submit a pull request.
+
+📄 License
+MIT
+
+📞 Contact
+For questions or feedback, please open an issue or contact me directly.
+
+Thank you for checking out the NDTV News Platform! 🚀
