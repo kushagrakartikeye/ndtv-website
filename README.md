@@ -1,10 +1,10 @@
-🚀 NDTV News Platform
+# 🚀 NDTV News Platform
 A Full-Stack News Aggregation and Management System
 
-📜 Overview
+# 📜 Overview
 This project is a full-stack news aggregation and management platform developed during my technical internship at NDTV. It features real-time news fetching, personalized recommendations, secure admin interfaces, and seamless integration with third-party services like Google Trends. The platform is built with modern web technologies and is designed for scalability, performance, and user engagement.
 
-🛠️ Tech Stack
+# 🛠️ Tech Stack
 Frontend: Next.js 13+ (App Router), TypeScript, React, CSS Modules
 
 Backend: Node.js, Next.js API Routes
@@ -21,7 +21,7 @@ Performance: Lazy Loading, Image Optimization, Lighthouse Optimizations
 
 UI/UX: Responsive Design, Splash Screen, Emotion Filtering
 
-🌟 Features
+# 🌟 Features
 1. Real-Time News Aggregation
 RSS Feed Parsing: Fetches, parses, and displays live news headlines from multiple RSS sources.
 
@@ -88,7 +88,7 @@ Cross-Functional Teams: Worked with designers and content teams for a seamless U
 
 Technical Documentation: Clear code comments and README for maintainability.
 
-🏗️ Architecture
+# 🏗️ Architecture
 Frontend: Next.js App Router for dynamic, SEO-friendly pages.
 
 Backend: Next.js API Routes for server-side logic and data fetching.
@@ -101,7 +101,7 @@ Third-Party Integrations: Custom scripts for Google Trends and RSS feeds.
 
 Performance: Optimized for fast load times and high Lighthouse scores.
 
-🚀 Getting Started
+# 🚀 Getting Started
 Prerequisites
 Node.js (v18+ recommended)
 
@@ -137,14 +137,14 @@ bash
 npm run dev
 Open http://localhost:3000 in your browser.
 
-🧪 Testing
+# 🧪 Testing
 Unit Tests: (Coming soon)
 
 Integration Tests: (Coming soon)
 
 Manual Testing: Test all features, including admin login, message management, and third-party integrations.
 
-🚀 Deployment
+# 🚀 Deployment
 Push your code to a GitHub repository.
 
 Connect the repository to Vercel.
@@ -153,7 +153,7 @@ Set environment variables in Vercel dashboard.
 
 Deploy!
 
-📝 Future Work
+# 📝 Future Work
 Machine Learning Recommendations: Integrate TensorFlow.js for more accurate personalization.
 
 Real-Time Analytics: Add WebSockets or GraphQL subscriptions for live user analytics.
@@ -162,13 +162,13 @@ Admin Dashboard Enhancements: Bulk actions and advanced filtering.
 
 Automated Testing: Add unit and integration tests.
 
-🤝 Contributing
+# 🤝 Contributing
 Contributions are welcome! Please open an issue or submit a pull request.
 
-📄 License
+# 📄 License
 MIT
 
-📞 Contact
+# 📞 Contact
 For questions or feedback, please open an issue or contact me directly.
 
 Thank you for checking out the NDTV News Platform! 🚀
